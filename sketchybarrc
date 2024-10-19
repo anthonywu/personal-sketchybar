@@ -53,6 +53,11 @@ sketchybar \
     --set ollama_ps icon="🦙" \
         update_freq=120 \
         script="$PLUGIN_DIR/ollama_ps.sh" \
+    --add item weather right \
+    --set weather \
+        update_freq=1800 \
+        icon="" \
+        script="$PLUGIN_DIR/weather.sh" \
     --add item clock right \
     --set clock \
         update_freq=20 \
