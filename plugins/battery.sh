@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 PERCENTAGE="$(pmset -g batt | grep -Eo "\d+%" | cut -d% -f1)"
 CHARGING="$(pmset -g batt | grep 'AC Power')"
@@ -19,10 +19,24 @@ case "${PERCENTAGE}" in
   *) ICON="􀛪"
 esac
 
-if [[ "$CHARGING" != "" ]]; then
-  ICON="􁐓"
+LABEL="${PERCENTAGE}%"
+
+# if charger is connected, override the battery percentage icon
+charger_info=$(system_profiler -json SPPowerDataType | jq -r '.SPPowerDataType.[] | select(has("sppower_ac_charger_watts"))')
+if [ "$(jq -r '.sppower_battery_charger_connected' <(echo $charger_info))" = "TRUE" ]; then
+  WATTAGE=$(jq -r '.sppower_ac_charger_watts' <(echo $charger_info))
+  if [ "$(jq -r '.sppower_battery_is_charging' <(echo $charger_info))" = "TRUE" ]; then
+    # connected and charging
+    ICON="􁐓"
+    LABEL="Charging – ${WATTAGE}W"
+  else
+    # connected but not charging battery, i.e. battery life management
+    ICON="􀢋"
+    LABEL="Fully Charged – ${WATTAGE}W"
+  fi
 fi
 
+echo $ICON, $LABEL
 # The item invoking this script (name $NAME) will get its icon and label
 # updated with the current battery status
-sketchybar --set "$NAME" icon="$ICON" label="${PERCENTAGE}%"
+sketchybar --set "$NAME" icon="$ICON" label="${LABEL}"
