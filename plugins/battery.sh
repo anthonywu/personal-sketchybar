@@ -31,7 +31,7 @@ if [ "$(jq -r '.sppower_battery_charger_connected' <(echo $charger_info))" = "TR
     LABEL="Charging – ${WATTAGE}W"
   else
     # connected but not charging battery, i.e. battery life management
-    ICON="􀢋"
+    ICON="􀷄"
     LABEL="Fully Charged – ${WATTAGE}W"
   fi
 fi
