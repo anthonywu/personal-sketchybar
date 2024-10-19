@@ -28,11 +28,11 @@ if [ "$(jq -r '.sppower_battery_charger_connected' <(echo $charger_info))" = "TR
   if [ "$(jq -r '.sppower_battery_is_charging' <(echo $charger_info))" = "TRUE" ]; then
     # connected and charging
     ICON="􁐓"
-    LABEL="Charging – ${WATTAGE}W"
+    LABEL="${WATTAGE}W Charging @ ${PERCENTAGE}%"
   else
     # connected but not charging battery, i.e. battery life management
     ICON="􀷄"
-    LABEL="Fully Charged – ${WATTAGE}W"
+    LABEL="Fully Charged"
   fi
 fi
 
