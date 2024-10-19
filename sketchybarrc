@@ -23,7 +23,7 @@ default=(
   padding_left=10
   padding_right=10
   icon.font="SF Symbols:Bold:18.0"
-  label.font="SF Pro Display:Heavy:18.0"
+  label.font="SF Pro Display:Bold:18.0"
   icon.color=0xffffffff
   label.color=0xffffffff
   icon.padding_left=4
@@ -45,6 +45,10 @@ sketchybar \
     --set tailscale \
         icon="􁅏" \
         script="$PLUGIN_DIR/tailscale_status.sh" \
+    --add item vpn left \
+    --set vpn \
+        icon="􁅏" \
+        script="$PLUGIN_DIR/secret_vpn_status.sh" \
     --add item mounted_external_volumes left \
     --set mounted_external_volumes \
         update_freq=120 \
