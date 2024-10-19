@@ -45,6 +45,10 @@ sketchybar \
     --set tailscale \
         icon="􁅏" \
         script="$PLUGIN_DIR/tailscale_status.sh" \
+    --add item mounted_external_volumes left \
+    --set mounted_external_volumes \
+        update_freq=120 \
+        script="$PLUGIN_DIR/secret_mounted_external_volumes.sh" \
     --add item ollama_ps center \
     --set ollama_ps icon="🦙" \
         update_freq=120 \

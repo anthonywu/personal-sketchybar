@@ -36,7 +36,6 @@ if [ "$(jq -r '.sppower_battery_charger_connected' <(echo $charger_info))" = "TR
   fi
 fi
 
-echo $ICON, $LABEL
 # The item invoking this script (name $NAME) will get its icon and label
 # updated with the current battery status
 sketchybar --set "$NAME" icon="$ICON" label="${LABEL}"
